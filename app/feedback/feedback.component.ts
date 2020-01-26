@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-feedback',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor() { }
+  feedback : any;
+
+  constructor(private service : ClientService) { }
 
   ngOnInit() {
+    let observableResult = this.service.listFeedback();
+    observableResult.subscribe((data)=>{
+      console.log(data)
+      this.feedback = data;
+    })
   }
 
 }

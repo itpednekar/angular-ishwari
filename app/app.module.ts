@@ -7,30 +7,136 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { EventsComponent } from './events/events.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BookaneventComponent } from './bookanevent/bookanevent.component';
+import { MydetailsComponent } from './mydetails/mydetails.component';
+import { BookappointmentComponent } from './bookappointment/bookappointment.component';
+import { ClientfeedbackComponent } from './clientfeedback/clientfeedback.component';
+import { PaymentdetailsComponent } from './paymentdetails/paymentdetails.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ClientService } from './client.service';
+import { AuthService } from './auth.service';
+import { ListUsersComponent } from './list-users/list-users.component';
+import { ListEventsComponent } from './list-events/list-events.component';
+import { ListEventsDescComponent } from './list-events-desc/list-events-desc.component';
+import { ListVenueCityComponent } from './list-venue-city/list-venue-city.component';
+import { ListLocationComponent } from './list-location/list-location.component';
+import { ListFoodTypeComponent } from './list-food-type/list-food-type.component';
+import { ListFoodSubMenuComponent } from './list-food-sub-menu/list-food-sub-menu.component';
+import { EventsComponent } from './events/events.component';
+import { InsertVenueComponent } from './insert-venue/insert-venue.component';
+import { InsertLocationComponent } from './insert-location/insert-location.component';
+import { EditLocationComponent } from './edit-location/edit-location.component';
+import { DeleteLocationComponent } from './delete-location/delete-location.component';
+import { InsertFoodSubMenuComponent } from './insert-food-sub-menu/insert-food-sub-menu.component';
+import { DeleteFoodSubMenuComponent } from './delete-food-sub-menu/delete-food-sub-menu.component';
+import { AddAddrofmgrComponent } from './add-addrofmgr/add-addrofmgr.component';
+import { DeleteEventDescComponent } from './delete-event-desc/delete-event-desc.component';
+import { DeleteFoodTypeComponent } from './delete-food-type/delete-food-type.component';
+import { EditEventDescComponent } from './edit-event-desc/edit-event-desc.component';
+import { EditFoodTypeComponent } from './edit-food-type/edit-food-type.component';
+import { EditMgrComponent } from './edit-mgr/edit-mgr.component';
+import { InsertEventDescComponent } from './insert-event-desc/insert-event-desc.component';
+import { InsertFoodTypeComponent } from './insert-food-type/insert-food-type.component';
+import { InsertMgrComponent } from './insert-mgr/insert-mgr.component';
+import { EditFoodSubMenuComponent } from './edit-food-sub-menu/edit-food-sub-menu.component';
+import { DeleteVenueCityComponent } from './delete-venue-city/delete-venue-city.component';
+
+
+// const parentModuleRoutes : Routes = [
+//   {
+//     path:'',component:HomeComponent,
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'about-us',component:AboutUsComponent}]
+//   },
+//   { 
+//     path:'home',component:HomeComponent,children:[{path:'contact-us',component:ContactUsComponent}]
+//   },
+//   { 
+//     path:'home',component:HomeComponent,children:[{path:'events',component:EventsComponent}]
+//   },
+//   { 
+//     path:'home',component:HomeComponent,children:[{path:'feedback',component:FeedbackComponent}]
+//   },
+//   { 
+//     path:'home',component:HomeComponent,children:[{path:'portfolio',component:PortfolioComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'mydetails',component:MydetailsComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'login',component:LoginComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'register',component:RegisterComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'clientfeedback',component:ClientfeedbackComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'bookanevent',component:BookaneventComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'bookappointment',component:BookappointmentComponent}]
+//   },
+//   {
+//     path:'home',component:HomeComponent,children:[{path:'paymentdetails',component:PaymentdetailsComponent}]
+//   }
+// ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutUsComponent,
-    EventsComponent,
     PortfolioComponent,
     FeedbackComponent,
     ContactUsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookaneventComponent,
+    MydetailsComponent,
+    BookappointmentComponent,
+    ClientfeedbackComponent,
+    PaymentdetailsComponent,
+    ListUsersComponent,
+    ListEventsComponent,
+    ListEventsDescComponent,
+    ListVenueCityComponent,
+    ListLocationComponent,
+    ListFoodTypeComponent,
+    ListFoodSubMenuComponent,
+    EventsComponent,
+    InsertVenueComponent,
+    InsertLocationComponent,
+    EditLocationComponent,
+    DeleteLocationComponent,
+    InsertFoodSubMenuComponent,
+    DeleteFoodSubMenuComponent,
+    AddAddrofmgrComponent,
+    DeleteEventDescComponent,
+    DeleteFoodTypeComponent,
+    EditEventDescComponent,
+    EditFoodTypeComponent,
+    EditMgrComponent,
+    InsertEventDescComponent,
+    InsertFoodTypeComponent,
+    InsertMgrComponent,
+    EditFoodSubMenuComponent,
+    DeleteVenueCityComponent
   ],
   imports: [
     FormsModule, //for ngModule 
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+  //  RouterModule.forRoot(parentModuleRoutes)
     RouterModule.forRoot([
       {path:"",component :HomeComponent},
       {path:"home",component :HomeComponent},
@@ -41,9 +147,39 @@ import { RegisterComponent } from './register/register.component';
       {path:"portfolio",component :PortfolioComponent},
       {path:"login",component :LoginComponent},
       {path:"register",component :RegisterComponent},
+      {path:"mydetails",component :MydetailsComponent},
+      {path:"paymentdetails",component :PaymentdetailsComponent},
+      {path:"bookanevent",component :BookaneventComponent},
+      {path:"bookappointment",component :BookappointmentComponent},
+      {path:"clientfeedback",component :RegisterComponent},
+       //-------------------------ADMIN------------------------------//
+      {path:"list-users",component :ListUsersComponent},
+      {path:"list-events",component :ListEventsComponent},
+      {path:"list-events-desc",component :ListEventsDescComponent},
+      {path:"list-food-type",component :ListFoodTypeComponent},
+      {path:"list-food-sub-menu",component :ListFoodSubMenuComponent},
+      {path:"list-location",component :ListLocationComponent},
+      {path:"list-venue-city",component :ListVenueCityComponent},
+      {path:"insert-venue",component :InsertVenueComponent},
+      {path:"insert-location",component :InsertLocationComponent},
+      {path:"edit-location/:locationId",component :EditLocationComponent},
+      {path:"delete-location/:locationId",component :DeleteLocationComponent},
+      {path:"insert-food-type",component :InsertFoodTypeComponent},
+      {path:"edit-food-type/:foodId",component :EditFoodTypeComponent},
+      {path:"delete-food-type/:foodId",component :DeleteFoodTypeComponent},
+      {path:"insert-mgr",component :InsertMgrComponent},
+      {path:"add-addrofmgr",component :AddAddrofmgrComponent},
+      {path:"insert-food-sub-menu",component :InsertFoodSubMenuComponent},
+      {path:"edit-food-sub-menu/:foodSubMenuId",component :EditFoodSubMenuComponent},
+      {path:"delete-food-sub-menu/:foodSubMenuId",component :DeleteFoodSubMenuComponent},
+      {path:"delete-venue-city/:venueCityId",component :DeleteVenueCityComponent}
     ])
   ],
-  providers: [],
+  exports:[RouterModule],
+  providers: [
+    ClientService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
